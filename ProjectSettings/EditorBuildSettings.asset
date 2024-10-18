@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: f43de4d8e5d12a4499f2d9aa13c45576
   - enabled: 1
+    path: Assets/Scenes/Classroom.unity
+    guid: 116a2ce9d020006499de6348cfc1d6ca
+  - enabled: 1
+    path: Assets/Scenes/Office.unity
+    guid: 2e4b1139deb0dd3468da4e6c6ea7c825
+  - enabled: 1
+    path: Assets/Scenes/Boss_Office.unity
+    guid: f8968e9610ec614438ae75766d1e8560
+  - enabled: 1
     path: Assets/Scenes/Room.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
