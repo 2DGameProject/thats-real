@@ -7,16 +7,27 @@ public class Puzzle1516 : MonoBehaviour
     public NumberBox boxPrefab;
     public NumberBox[,] boxes = new NumberBox[4, 4];
     public Sprite[] sprites;
-
-    void Start()
+    public GameObject backgroundOverlay;
+    public GameObject puzzleUI;
+    public int inicio = 1;
+    public void StartPuzzle()
     {
+        backgroundOverlay.SetActive(true); // Escurece o fundo
+        puzzleUI.SetActive(true);
         Init();
-        for (int i = 0; i < 1000; i++)
+        if (inicio == 1)
         {
-            Shuffle();
+            for (int i = 0; i < 1000; i++)
+            {
+                Shuffle();
+            }
+            inicio = 0;
         }
     }
 
+
+
+    // Inicializa as caixas do puzzle
     void Init()
     {
         int n = 0;
@@ -32,7 +43,7 @@ public class Puzzle1516 : MonoBehaviour
         }
     }
 
-    
+
 
     void ClickToSwap(int x, int y)
     {
@@ -120,6 +131,14 @@ public class Puzzle1516 : MonoBehaviour
     bool isRepeatMove(Vector2 pos)
     {
         return pos * -1 == lastMove;
+    }
+
+    public void EndPuzzle()
+    {
+
+        // Desativar o fundo escuro e o puzzle UI
+        backgroundOverlay.SetActive(false);
+        puzzleUI.SetActive(false);
     }
 
 
