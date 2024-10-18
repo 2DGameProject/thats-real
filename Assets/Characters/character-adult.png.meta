@@ -106,6 +106,71 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -5402,7 +5467,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character-adult_259
+      name: PlayerIdle
       rect:
         serializedVersion: 2
         x: 864
@@ -5717,11 +5782,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character-adult_273
+      name: PlayerIdle2
       rect:
         serializedVersion: 2
         x: 913
-        y: 1727
+        y: 1728
         width: 45
         height: 73
       alignment: 0
@@ -5738,7 +5803,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character-adult_274
+      name: PlayerIdle3
       rect:
         serializedVersion: 2
         x: 960
@@ -5759,7 +5824,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character-adult_275
+      name: PlayerIdle4
       rect:
         serializedVersion: 2
         x: 1008
@@ -5780,7 +5845,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character-adult_276
+      name: PlayerIdle5
       rect:
         serializedVersion: 2
         x: 1057
@@ -5801,7 +5866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character-adult_277
+      name: PlayerIdle6
       rect:
         serializedVersion: 2
         x: 1105
@@ -10956,6 +11021,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      PlayerIdle: -1011287780
+      PlayerIdle2: 18965208
+      PlayerIdle3: -54676630
+      PlayerIdle4: -1808098242
+      PlayerIdle5: -761605995
+      PlayerIdle6: -1362031022
       character-adult_1: -1101202593
       character-adult_10: 869323318
       character-adult_100: -952806850
@@ -11115,7 +11186,6 @@ TextureImporter:
       character-adult_251: -165792462
       character-adult_252: 644865119
       character-adult_254: 1040527304
-      character-adult_259: -1011287780
       character-adult_26: -1239084813
       character-adult_260: 1916727101
       character-adult_266: -838996922
@@ -11126,11 +11196,6 @@ TextureImporter:
       character-adult_270: -1948759827
       character-adult_271: 73505991
       character-adult_272: -319868291
-      character-adult_273: 18965208
-      character-adult_274: -54676630
-      character-adult_275: -1808098242
-      character-adult_276: -761605995
-      character-adult_277: -1362031022
       character-adult_278: -1609806886
       character-adult_279: 397625088
       character-adult_28: -936807575
