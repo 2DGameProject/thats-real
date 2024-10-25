@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class InteractbleObject : MonoBehaviour
+public class InteractableFinal : MonoBehaviour
 {
     public KeyCode interactKey;
     public bool isInRange;
     public UnityEvent interactAction;
-    public UnityEvent LostTriggerAction;
 
+    public GameObject fake_walls;
+    public GameObject Fake_Black;
     void Update()
     {
         if (isInRange && Input.GetKeyDown(interactKey))
@@ -28,6 +29,17 @@ public class InteractbleObject : MonoBehaviour
     public void Interact()
     {
         interactAction.Invoke();
+
+        // Disable the tilemap and other GameObjects
+        if (fake_walls != null)
+        {
+            fake_walls.SetActive(false);  // This disables the Tilemap GameObject and its collider
+        }
+
+        if (Fake_Black != null)
+        {
+            Fake_Black.SetActive(false);  // Optional: Disable another GameObject if needed
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,7 +55,6 @@ public class InteractbleObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = false;
-            LostTriggerAction.Invoke();
         }
     }
 
@@ -55,3 +66,4 @@ public class InteractbleObject : MonoBehaviour
         }
     }
 }
+
