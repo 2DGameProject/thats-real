@@ -10,7 +10,14 @@ public class PanelManager : MonoBehaviour
     {
         panel.SetActive(panel.activeSelf ? false : true);
     }
-
+    public void ActivePanel()
+    {
+        panel.SetActive(true);
+    }
+    public void DeactivePanel()
+    {
+        panel.SetActive(false);
+    }
     void Start()
     {
         panel.SetActive(false);

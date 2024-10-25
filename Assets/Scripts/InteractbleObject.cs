@@ -10,6 +10,8 @@ public class InteractbleObject : MonoBehaviour
     public KeyCode interactKey;
     public bool isInRange;
     public UnityEvent interactAction;
+    public UnityEvent LostTriggerAction;
+
     void Update()
     {
         if (isInRange && Input.GetKeyDown(interactKey))
@@ -41,6 +43,7 @@ public class InteractbleObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = false;
+            LostTriggerAction.Invoke();
         }
     }
 
