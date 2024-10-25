@@ -46,7 +46,7 @@ public class NumberBox : MonoBehaviour
 
     public bool IsEmpty()
     {
-        return index == 16;
+        return index == 9;
     }
 
     void OnMouseDown()
