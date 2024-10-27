@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+
     public Animator anim;
     public float speed;
     // Update is called once per frame
+    public Rigidbody2D rb;
     void Update()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
@@ -14,6 +16,8 @@ public class NewBehaviourScript : MonoBehaviour
         anim.SetFloat("Vertical", movement.y);
         anim.SetFloat("Speed", movement.sqrMagnitude);
 
-        transform.position += movement * speed * Time.deltaTime;
+        // transform.position += movement * speed * Time.deltaTime;
+        // rb.MovePosition(transform.position + movement * speed * Time.deltaTime);
+        rb.velocity = new Vector2(movement.x * speed, movement.y * speed);
     }
 }

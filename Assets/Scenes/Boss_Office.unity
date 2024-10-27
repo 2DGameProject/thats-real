@@ -3113,6 +3113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 538481679}
   speed: 5
+  rb: {fileID: 538481675}
 --- !u!95 &538481679
 Animator:
   serializedVersion: 5
@@ -8533,7 +8534,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.1
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
