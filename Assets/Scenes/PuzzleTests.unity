@@ -1220,6 +1220,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  LostTriggerAction:
+    m_PersistentCalls:
+      m_Calls: []
+  highlightObject: {fileID: 0}
 --- !u!1 &769148314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,6 +2146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1198759502}
   speed: 5
+  rb: {fileID: 0}
 --- !u!95 &1198759502
 Animator:
   serializedVersion: 5

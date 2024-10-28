@@ -11,6 +11,7 @@ public class InteractbleObject : MonoBehaviour
     public bool isInRange;
     public UnityEvent interactAction;
     public UnityEvent LostTriggerAction;
+    public GameObject highlightObject;
 
     void Update()
     {
@@ -43,6 +44,7 @@ public class InteractbleObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = false;
+            highlightObject.SetActive(false);
             LostTriggerAction.Invoke();
         }
     }
@@ -51,6 +53,7 @@ public class InteractbleObject : MonoBehaviour
     {
         if (isInRange)
         {
+            highlightObject.SetActive(true);
             GUI.Box(new Rect(0, 0, 200, 25), "Press 'E' to interact");
         }
     }
