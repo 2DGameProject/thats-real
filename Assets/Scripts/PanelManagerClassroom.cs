@@ -12,7 +12,7 @@ public class PanelManagerClassroom : MonoBehaviour
         darkOverlay.SetActive(false);
     }
 
-    public void ShowPanel() // Certifique-se de que este método é público
+    public void ShowPanel() 
     {
         panel.SetActive(true);
         darkOverlay.SetActive(true);
