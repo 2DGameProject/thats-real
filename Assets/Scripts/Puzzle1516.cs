@@ -10,118 +10,157 @@ public class Puzzle1516 : MonoBehaviour
     public GameObject puzzleUI; // Painel do Puzzle
     public GameObject closeButton; // Botão de Fechar
     public GameObject player; // Jogador para desativar o movimento
+    public Vector2 startPoint = new Vector2(8, 8); // Ponto de início para o puzzle com deslocamento
 
     private bool isActive = false; // Controla o estado do puzzle (ativo ou inativo)
+    private bool isInitialized = false; // Controle para evitar recriação do puzzle
     private Vector2 lastMove; // Guarda o último movimento para evitar repetições no shuffle
+    private Collider2D playerCollider; // Referência ao Collider do jogador
 
     void Start()
     {
-        // Desativa o fundo escuro e o botão de fechar no início do jogo
         backgroundOverlay.SetActive(false);
-        puzzleUI.SetActive(false); // Desativa o puzzle UI no início também
+        puzzleUI.SetActive(false);
         closeButton.SetActive(false);
+
+        // Obtenha o Collider do jogador
+        playerCollider = player.GetComponent<Collider2D>();
     }
 
     public void StartPuzzle()
     {
-        if (isActive) return; // Se o puzzle já está ativo, não faz nada
+        if (isActive) return;
 
-        backgroundOverlay.SetActive(true); // Mostra o fundo escuro
-        puzzleUI.SetActive(true); // Mostra o UI do Puzzle
-        closeButton.SetActive(true); // Ativa o botão de fechar
+        // Garante que o fundo, UI do puzzle e o botão de fechar estejam visíveis
+        backgroundOverlay.SetActive(true);
+        puzzleUI.SetActive(true);
+        closeButton.SetActive(true);
 
-        player.GetComponent<NewBehaviourScript>().enabled = false; // Desativa o movimento do jogador
-        Init(); // Inicializa o puzzle
-        Shuffle(); // Embaralha o puzzle
+        // Desativa o movimento do jogador enquanto o puzzle está ativo
+        player.GetComponent<NewBehaviourScript>().enabled = false;
 
-        isActive = true; // Marca o puzzle como ativo
+        // Desativa a colisão do jogador
+        if (playerCollider != null)
+        {
+            playerCollider.enabled = false;
+        }
+
+        foreach (var box in boxes)
+        {
+            if (box != null)
+            {
+                box.gameObject.SetActive(true);
+                box.UpdatePos(box.GetX(), box.GetY()); // Usa métodos de acesso
+            }
+        }
+
+        // Inicializa o puzzle apenas na primeira vez
+        if (!isInitialized)
+        {
+            Init();
+            for (int i = 0;i<999;i++)
+                Shuffle(); // Embaralha o puzzle na primeira vez
+            isInitialized = true;
+        }
+
+        isActive = true;
     }
 
-    // Inicializa as peças do puzzle
     void Init()
     {
         int n = 0;
-        for (int y = 2; y >= 0; y--) // Ajustado para 3x3
+        for (int y = 2; y >= 0; y--)
         {
-            for (int x = 0; x < 3; x++) // Ajustado para 3x3
+            for (int x = 0; x < 3; x++)
             {
-                NumberBox box = Instantiate(boxPrefab, new Vector2(x, y), Quaternion.identity);
-                box.Init(x, y, n + 1, sprites[n], ClickToSwap); // Inicializa a peça
-                boxes[x, y] = box; // Armazena a peça na matriz
+                Vector2 position = new Vector2(x + startPoint.x, y + startPoint.y); // Usa deslocamento inicial
+                NumberBox box = Instantiate(boxPrefab, position, Quaternion.identity);
+                box.Init(x, y, n + 1, sprites[n], ClickToSwap);
+                boxes[x, y] = box;
                 n++;
             }
         }
     }
 
-    // Lógica de movimento ao clicar na peça
+    // Configura a formação inicial das peças
+    public void SetInitialPositions(int[,] initialPositions)
+    {
+        for (int y = 2; y >= 0; y--)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                int pieceIndex = initialPositions[x, y];
+                boxes[x, y].index = pieceIndex; // Define a posição inicial conforme o array
+                boxes[x, y].UpdatePos(x, y);
+            }
+        }
+    }
+
     void ClickToSwap(int x, int y)
     {
         int dx = getDx(x, y);
         int dy = getDy(x, y);
-        if (dx != 0 || dy != 0) // Se há um movimento possível
+        if (dx != 0 || dy != 0)
         {
             Swap(x, y, dx, dy);
+            if (IsPuzzleSolved())
+            {
+                OnPuzzleSolved();
+            }
         }
     }
 
-    // Troca as peças de lugar
     void Swap(int x, int y, int dx, int dy)
     {
-        var from = boxes[x, y]; // Peça de origem
-        var target = boxes[x + dx, y + dy]; // Peça alvo
+        var from = boxes[x, y];
+        var target = boxes[x + dx, y + dy];
 
-        // Troca as peças na matriz
         boxes[x, y] = target;
         boxes[x + dx, y + dy] = from;
 
-        // Atualiza as posições das peças
         from.UpdatePos(x + dx, y + dy);
         target.UpdatePos(x, y);
     }
 
-    // Verifica se a peça pode se mover no eixo X
     int getDx(int x, int y)
     {
-        if (x < 2 && boxes[x + 1, y].IsEmpty()) // Checa se a peça à direita está vazia
+        if (x < 2 && boxes[x + 1, y].IsEmpty())
             return 1;
-        if (x > 0 && boxes[x - 1, y].IsEmpty()) // Checa se a peça à esquerda está vazia
+        if (x > 0 && boxes[x - 1, y].IsEmpty())
             return -1;
         return 0;
     }
 
-    // Verifica se a peça pode se mover no eixo Y
     int getDy(int x, int y)
     {
-        if (y < 2 && boxes[x, y + 1].IsEmpty()) // Checa se a peça acima está vazia
+        if (y < 2 && boxes[x, y + 1].IsEmpty())
             return 1;
-        if (y > 0 && boxes[x, y - 1].IsEmpty()) // Checa se a peça abaixo está vazia
+        if (y > 0 && boxes[x, y - 1].IsEmpty())
             return -1;
         return 0;
     }
 
-    // Embaralha o puzzle
     void Shuffle()
     {
-        for (int i = 0; i < 3; i++) // Ajustado para 3x3
+        for (int i = 0; i < 3; i++)
         {
-            for (int j = 0; j < 3; j++) // Ajustado para 3x3
+            for (int j = 0; j < 3; j++)
             {
-                if (boxes[i, j].IsEmpty()) // Encontra a peça vazia
+                if (boxes[i, j].IsEmpty())
                 {
                     Vector2 pos = getValidMove(i, j);
-                    Swap(i, j, (int)(pos.x), (int)(pos.y)); // Realiza a troca
+                    Swap(i, j, (int)(pos.x), (int)(pos.y));
                 }
             }
         }
     }
 
-    // Calcula um movimento válido durante o shuffle
     Vector2 getValidMove(int x, int y)
     {
         Vector2 pos = new Vector2();
         do
         {
-            int n = Random.Range(0, 4); // Gera uma direção aleatória
+            int n = Random.Range(0, 4);
             if (n == 0)
                 pos = Vector2.left;
             else if (n == 1)
@@ -132,33 +171,66 @@ public class Puzzle1516 : MonoBehaviour
                 pos = Vector2.down;
         } while (!(isValidRange(x + (int)pos.x) && isValidRange(y + (int)pos.y)) || isRepeatMove(pos));
 
-        lastMove = pos; // Atualiza o último movimento
+        lastMove = pos;
         return pos;
     }
 
-    // Verifica se a posição está dentro do grid 3x3
     bool isValidRange(int n)
     {
-        return n >= 0 && n <= 2; // Ajustado para 3x3
+        return n >= 0 && n <= 2;
     }
 
-    // Impede movimentos repetidos (de ida e volta) no shuffle
     bool isRepeatMove(Vector2 pos)
     {
-        return pos * -1 == lastMove; // Evita refazer o último movimento
+        return pos * -1 == lastMove;
     }
 
-    // Método para encerrar o puzzle e reativar o jogador
+    bool IsPuzzleSolved()
+    {
+        int n = 1;
+        for (int y = 2; y >= 0; y--)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                if (boxes[x, y].index != n) return false;
+                n++;
+                if (n > 8) return true;
+            }
+        }
+        return true;
+    }
+
+    void OnPuzzleSolved()
+    {
+        Debug.Log("Puzzle resolvido!");
+        EndPuzzle();
+    }
+
     public void EndPuzzle()
     {
-        // Desativa o fundo escuro e o puzzle UI
+        // Oculta o fundo, UI do puzzle e botão de fechar
         backgroundOverlay.SetActive(false);
         puzzleUI.SetActive(false);
-        closeButton.SetActive(false); // Desativa o botão de fechar
+        closeButton.SetActive(false);
 
-        // Reativa o controle do jogador
+        // Desativa cada peça do puzzle para ocultá-la do mapa
+        foreach (var box in boxes)
+        {
+            if (box != null)
+            {
+                box.gameObject.SetActive(false);
+            }
+        }
+
+        // Reativa o movimento do jogador
         player.GetComponent<NewBehaviourScript>().enabled = true;
 
-        isActive = false; // Marca o puzzle como inativo
+        // Reativa a colisão do jogador
+        if (playerCollider != null)
+        {
+            playerCollider.enabled = true;
+        }
+
+        isActive = false;
     }
 }

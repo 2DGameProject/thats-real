@@ -6,19 +6,30 @@ using UnityEngine.UI;
 public class KeyPadScriptClassroom : MonoBehaviour
 {
     public TMP_Text codeOfKeypad;
-    public GameObject darkOverlay;  // Referência ao fundo escuro
-    public GameObject player;       // Referência ao jogador para desativar o movimento
-    public GameObject closeButton;  // Referência ao botão de fechar
+    public GameObject darkOverlay;      // Referência ao fundo escuro
+    public GameObject player;           // Referência ao jogador para desativar o movimento
+    public GameObject closeButton;      // Referência ao botão de fechar
+    public GameObject keyItem;          // Objeto chave que será revelado
+    public GameObject keyItemCanvas;    // Canvas opcional para mostrar que o item foi adquirido
 
     void Start()
     {
         codeOfKeypad.text = "";
         codeOfKeypad.color = Color.white;
 
-        // Inicialmente, desativamos o KeyPad e o overlay
+        // Inicialmente, desativamos o KeyPad, overlay, item chave e canvas
         gameObject.SetActive(false);
         darkOverlay.SetActive(false);
         closeButton.SetActive(false);
+
+        if (keyItem != null)
+        {
+            keyItem.SetActive(false);
+        }
+        if (keyItemCanvas != null)
+        {
+            keyItemCanvas.SetActive(false);
+        }
     }
 
     public void AddNumber(string number)
@@ -39,16 +50,36 @@ public class KeyPadScriptClassroom : MonoBehaviour
 
     public void CodeComplete()
     {
-        if (codeOfKeypad.text == "42334")
+        if (codeOfKeypad.text == "42334") // Verifica se o código está correto
         {
             codeOfKeypad.color = Color.green;
             Debug.Log("Correct code!");
+
+            // Define o estado do jogo como tendo o item chave e revela o item
+            GameStateClassroom.PickUpKeyItem();
+            RevealKeyItem();
         }
         else
         {
             codeOfKeypad.color = Color.red;
             Debug.Log("Incorrect code!");
+
+            // Reseta o código e a cor
             codeOfKeypad.text = "";
+            codeOfKeypad.color = Color.white;
+        }
+    }
+
+    private void RevealKeyItem()
+    {
+        // Revela o item chave ou o Canvas
+        if (keyItem != null)
+        {
+            keyItem.SetActive(true);
+        }
+        if (keyItemCanvas != null)
+        {
+            keyItemCanvas.SetActive(true);
         }
     }
 
@@ -67,6 +98,7 @@ public class KeyPadScriptClassroom : MonoBehaviour
         gameObject.SetActive(isActive);
         darkOverlay.SetActive(isActive);
         closeButton.SetActive(isActive);
+
 
         // Desativar/ativar o controle do jogador
         player.GetComponent<NewBehaviourScript>().enabled = !isActive;

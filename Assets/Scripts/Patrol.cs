@@ -6,10 +6,8 @@ using TMPro;
 
 public class Patrol : MonoBehaviour
 {
-
     public float speed;
     public float startWaitTime;
-    public float TimeToReachSpot;
     public Transform[] moveSpots;
     public bool isInteracting;
 
@@ -19,19 +17,20 @@ public class Patrol : MonoBehaviour
     public GameObject nextDialogueButton;
     private int dialogueIndex;
 
+    public Animator anim;
 
     private float waitTime;
-    private float _timeToReachSpot;
     private int InitialSpot;
-    
+    private Vector3 lastPosition;
+
     void Start()
     {
         InitialSpot = 0;
+        lastPosition = transform.position;
     }
 
     void Update()
     {
-
         if(isInteracting)
         {
             if(Input.GetKeyDown(KeyCode.E))
@@ -50,26 +49,63 @@ public class Patrol : MonoBehaviour
             if(dialogueText.text == dialogues[dialogueIndex])
             {
                 nextDialogueButton.SetActive(true);
-
             }
-
+            
+            anim.SetFloat("Vertical", 0);
+            anim.SetFloat("Horizontal", 0);
+            anim.SetFloat("Speed", 0);
+            
             return;
         }
 
         transform.position = Vector2.MoveTowards(transform.position, moveSpots[InitialSpot].position, speed * Time.deltaTime);
 
+        Vector3 movementDirection = transform.position - lastPosition;
+
+        if (Mathf.Abs(movementDirection.x) >= Mathf.Abs(movementDirection.y))
+        {
+            if (movementDirection.x > 0)
+            {
+                anim.SetFloat("Horizontal", 1);
+                anim.SetFloat("Vertical", 0);
+            }
+            else if (movementDirection.x < 0)
+            {
+                anim.SetFloat("Horizontal", -1);
+                anim.SetFloat("Vertical", 0);
+            }
+        }
+        else
+        {
+            if (movementDirection.y > 0)
+            {
+                anim.SetFloat("Vertical", 1);
+                anim.SetFloat("Horizontal", 0);
+            }
+            else if (movementDirection.y < 0)
+            {
+                anim.SetFloat("Vertical", -1);
+                anim.SetFloat("Horizontal", 0);
+            }
+        }
+
+        anim.SetFloat("Speed", movementDirection.magnitude);
+
+        lastPosition = transform.position;
 
         if(Vector2.Distance(transform.position, moveSpots[InitialSpot].position) < 0.2f)
         {
             if(waitTime <= 0)
             {
-                InitialSpot += 1;
+                InitialSpot++;
                 if(InitialSpot == moveSpots.Length)
                 {
                     InitialSpot = 0;
                 }
                 waitTime = startWaitTime;
-            }else{
+            }
+            else
+            {
                 waitTime -= Time.deltaTime;
             }
         }

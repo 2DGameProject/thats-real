@@ -11,9 +11,10 @@ public class DialoguesScript : MonoBehaviour
     public TMP_Text dialogueText; 
 
     private Coroutine typingCoroutine;
-
+    private bool isInteracting;
     public void ResetDialogue()
     {
+        isInteracting = false;
         if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine);
@@ -30,6 +31,9 @@ public class DialoguesScript : MonoBehaviour
         dialogueText.text = ""; 
         foreach (char letter in dialogue.ToCharArray())
         {
+            if(isInteracting){
+                break;
+            }
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.05f);
         }
