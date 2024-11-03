@@ -16,8 +16,16 @@ public class InteractableObject89 : MonoBehaviour
         // Se o jogador estiver no alcance e pressionar a tecla de interação
         if (isInRange && Input.GetKeyDown(interactKey))
         {
-            playerMovement.rb.velocity = Vector2.zero;
-            Interact();
+            // Verifica se o jogador tem o item chave
+            if (GameStateClassroom.hasKeyItem)
+            {
+                playerMovement.rb.velocity = Vector2.zero;
+                Interact();
+            }
+            else
+            {
+                Debug.Log("Você precisa do item chave para iniciar o puzzle!");
+            }
         }
     }
 

@@ -58,16 +58,28 @@ public class KeyPadScriptClassroom : MonoBehaviour
             // Define o estado do jogo como tendo o item chave e revela o item
             GameStateClassroom.PickUpKeyItem();
             RevealKeyItem();
+
+            StartCoroutine(CloseKeyPadWithDelay(1f));
         }
         else
         {
             codeOfKeypad.color = Color.red;
-            Debug.Log("Incorrect code!");
+            StartCoroutine(ResetCodeAfterDelay(0.5f));
 
-            // Reseta o código e a cor
-            codeOfKeypad.text = "";
-            codeOfKeypad.color = Color.white;
         }
+    }
+
+    private IEnumerator CloseKeyPadWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CloseKeyPad();
+    }
+
+    private IEnumerator ResetCodeAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        codeOfKeypad.text = "";
+        codeOfKeypad.color = Color.white;
     }
 
     private void RevealKeyItem()
