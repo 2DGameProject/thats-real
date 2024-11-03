@@ -16,6 +16,8 @@ public class Final_Interaction : MonoBehaviour
     private bool countdownStarted = false;  // Track if the countdown has started
     private float countdownTime = 300f;  // 5 minutes in seconds
 
+    private Coroutine typingCoroutine; // Reference to the typing coroutine
+
     void Start()
     {
         ResetDialogue();
@@ -34,8 +36,16 @@ public class Final_Interaction : MonoBehaviour
                 }
                 else
                 {
+                    ResetDialogue(); // Reset dialogue to start fresh
                     dialogueBox.SetActive(true);
-                    StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
+
+                    // Stop any ongoing typing coroutine before starting a new one
+                    if (typingCoroutine != null)
+                    {
+                        StopCoroutine(typingCoroutine);
+                    }
+
+                    typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
 
                     if (!countdownStarted)  // Ensure countdown only starts once
                     {
@@ -59,12 +69,21 @@ public class Final_Interaction : MonoBehaviour
     private void ResetDialogue()
     {
         dialogueIndex = 0;
-        dialogueText.text = "";
+        dialogueText.text = ""; // Clear the text to start fresh
         dialogueBox.SetActive(false);
+        nextDialogueButton.SetActive(false); // Hide next button initially
+
+        // Stop the typing coroutine if it's running to avoid overlap
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null; // Reset the reference
+        }
     }
 
     IEnumerator TypeDialogue(string dialogue)
     {
+        dialogueText.text = ""; // Clear text before typing
         foreach (char letter in dialogue.ToCharArray())
         {
             dialogueText.text += letter;
@@ -76,11 +95,17 @@ public class Final_Interaction : MonoBehaviour
     {
         nextDialogueButton.SetActive(false);
 
+        // Stop any ongoing typing coroutine before starting a new one
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
         if (dialogueIndex < dialogues.Length - 1)
         {
             dialogueIndex++;
-            dialogueText.text = "";
-            StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
+            dialogueText.text = ""; // Clear text before starting next dialogue
+            typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
         }
         else
         {
@@ -101,6 +126,7 @@ public class Final_Interaction : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInteracting = false;
+            ResetDialogue(); // Reset when leaving the interaction zone
         }
     }
 
