@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class GameStateClassroom : MonoBehaviour
 {
-    // Variável estática para controlar se o jogador pegou o objeto chave
-    public static bool hasKeyItem = false;
 
-    // Método para definir que o jogador pegou o objeto
+    public static bool hasKeyItem = false;
+    public static bool isCabinetAvailable = false; 
+
+
     public static void PickUpKeyItem()
     {
         hasKeyItem = true;
-        Debug.Log("Objeto chave adquirido! Agora você pode interagir com o puzzle.");
+
     }
 
-    // Método para verificar se o jogador possui o objeto chave
+    public static void SetCabinetAvailable()
+    {
+        isCabinetAvailable = true;
+        Debug.Log("O armário está disponível para interação.");
+    }
+
+
     public static bool PlayerHasKeyItem()
     {
         return hasKeyItem;

@@ -9,7 +9,8 @@ public class Puzzle1516 : MonoBehaviour
     public GameObject backgroundOverlay;
     public GameObject puzzleUI; 
     public GameObject closeButton;
-    public GameObject player; 
+    public GameObject player;
+    public GameObject cabinet; // Referência ao armário na cena
     public Vector2 startPoint = new Vector2(8, 8); 
 
     private bool isActive = false; 
@@ -57,7 +58,7 @@ public class Puzzle1516 : MonoBehaviour
         if (!isInitialized)
         {
             Init();
-            for (int i = 0;i<999;i++)
+            for (int i = 0;i<100;i++)
                 Shuffle(); 
             isInitialized = true;
         }
@@ -200,7 +201,19 @@ public class Puzzle1516 : MonoBehaviour
 
     void OnPuzzleSolved()
     {
-        Debug.Log("Puzzle resolvido!");
+
+        // Traz o armário para frente
+        GameStateClassroom.SetCabinetAvailable();
+        GameObject cabinet = GameObject.FindWithTag("Armario");
+        if (cabinet != null)
+        {
+            SpriteRenderer renderer = cabinet.GetComponent<SpriteRenderer>();
+            if (renderer != null)
+            {
+                renderer.sortingOrder = 3; // Ajuste o sorting order conforme necessário
+            }
+        }
+
         EndPuzzle();
     }
 

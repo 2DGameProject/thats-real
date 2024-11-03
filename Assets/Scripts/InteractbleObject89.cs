@@ -21,8 +21,14 @@ public class InteractableObject89 : MonoBehaviour
         // Se o jogador estiver no alcance e pressionar a tecla de interação
         if (isInRange && Input.GetKeyDown(interactKey))
         {
-            // Verifica se o jogador tem o item chave
-            if (GameStateClassroom.hasKeyItem)
+            // Verifica se o armário está disponível (puzzle resolvido)
+            if (GameStateClassroom.isCabinetAvailable)
+            {
+                ShowTemporaryMessage("Você encontrou o armário!");
+                Debug.Log("Você interagiu com o armário.");
+            }
+            // Caso contrário, verifica se o jogador possui o item chave para iniciar o puzzle
+            else if (GameStateClassroom.hasKeyItem)
             {
                 playerMovement.rb.velocity = Vector2.zero;
                 Interact();
@@ -89,7 +95,7 @@ public class InteractableObject89 : MonoBehaviour
         {
             StopCoroutine(notificationCoroutine);
         }
-        notificationCoroutine = StartCoroutine(DisplayMessage(message, 4f)); // Exibe a mensagem por 2 segundos
+        notificationCoroutine = StartCoroutine(DisplayMessage(message, 3f)); // Exibe a mensagem por 2 segundos
     }
 
     private IEnumerator DisplayMessage(string message, float duration)
