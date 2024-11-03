@@ -11,6 +11,7 @@ public class Patrol : MonoBehaviour
     public Transform[] moveSpots;
     public bool isInteracting;
 
+    private Coroutine typingCoroutine;
     public string[] dialogues;
     public TMP_Text dialogueText;
     public GameObject dialogueBox;
@@ -42,7 +43,12 @@ public class Patrol : MonoBehaviour
                 else
                 {
                     dialogueBox.SetActive(true);
-                    StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
+                    nextDialogueButton.SetActive(false);
+                    if (typingCoroutine != null)
+                    {
+                        StopCoroutine(typingCoroutine);
+                    }
+                    StartTyping(dialogues[dialogueIndex]);
                 }
             }
 
@@ -111,11 +117,24 @@ public class Patrol : MonoBehaviour
         }
     }
 
+    private void StartTyping(string dialogue)
+    {
+        dialogueText.text = "";
+        typingCoroutine = StartCoroutine(TypeDialogue(dialogue));
+    }
+
     private void ResetDialogue()
     {
+        isInteracting = false;
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        dialogueBox.SetActive(false);
         dialogueIndex = 0;
         dialogueText.text = "";
-        dialogueBox.SetActive(false);
     }
 
     IEnumerator TypeDialogue(string dialogue)
@@ -123,7 +142,7 @@ public class Patrol : MonoBehaviour
         foreach (char letter in dialogue.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.025f);
         }
     }
 
@@ -134,8 +153,7 @@ public class Patrol : MonoBehaviour
         if(dialogueIndex < dialogues.Length - 1)
         {
             dialogueIndex++;
-            dialogueText.text = "";
-            StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
+            StartTyping(dialogues[dialogueIndex]);
         }
         else
         {

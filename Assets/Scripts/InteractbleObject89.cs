@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class InteractableObject89 : MonoBehaviour
 {
@@ -9,7 +11,10 @@ public class InteractableObject89 : MonoBehaviour
     public GameObject player; // Referência ao jogador para desativar o movimento
     public GameObject highlightObject;
     public NewBehaviourScript playerMovement; // Referência ao script de movimento do jogador
-    private Vector2 originalVelocity; // Para armazenar a velocidade original do jogador
+    public GameObject messageCanvas; // Canvas com fundo branco e texto de mensagem
+    public TMP_Text notificationText; // Texto de notificação no Canvas
+
+    private Coroutine notificationCoroutine; // Controle da exibição da mensagem
 
     void Update()
     {
@@ -24,7 +29,7 @@ public class InteractableObject89 : MonoBehaviour
             }
             else
             {
-                Debug.Log("Você precisa do item chave para iniciar o puzzle!");
+                ShowTemporaryMessage("Parece que está faltando uma peça");
             }
         }
     }
@@ -33,6 +38,12 @@ public class InteractableObject89 : MonoBehaviour
     {
         isInRange = false; // Inicialmente, o jogador não está no alcance
         highlightObject.SetActive(false);
+
+        // Certifique-se de que o Canvas e o texto estão escondidos no início
+        if (messageCanvas != null)
+        {
+            messageCanvas.SetActive(false);
+        }
     }
 
     public void Interact()
@@ -56,18 +67,39 @@ public class InteractableObject89 : MonoBehaviour
         {
             isInRange = false; // Jogador saiu do alcance
             highlightObject.SetActive(false);
-            
+
+            // Garante que a mensagem e o canvas sejam ocultados ao sair do alcance
+            if (notificationCoroutine != null)
+            {
+                StopCoroutine(notificationCoroutine);
+                notificationCoroutine = null;
+            }
+
+            if (messageCanvas != null)
+            {
+                messageCanvas.SetActive(false);
+            }
         }
     }
 
-    // Método para exibir o prompt de interação
-    private void OnGUI()
+    // Método para exibir mensagem temporária
+    private void ShowTemporaryMessage(string message)
     {
-        if (isInRange)
+        if (notificationCoroutine != null)
         {
-            // Exibe o prompt na tela
-            
-            GUI.Box(new Rect(0, 0, 200, 25), "Press 'E' to interact");
+            StopCoroutine(notificationCoroutine);
         }
+        notificationCoroutine = StartCoroutine(DisplayMessage(message, 4f)); // Exibe a mensagem por 2 segundos
+    }
+
+    private IEnumerator DisplayMessage(string message, float duration)
+    {
+        notificationText.text = message;
+        messageCanvas.SetActive(true); // Mostra o Canvas com o retângulo branco e a mensagem
+
+        yield return new WaitForSeconds(duration);
+
+        messageCanvas.SetActive(false); // Oculta o Canvas após o tempo definido
+        notificationCoroutine = null;
     }
 }

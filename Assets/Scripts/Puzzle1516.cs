@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class Puzzle1516 : MonoBehaviour
 {
-    public NumberBox boxPrefab; // Prefab de cada peça do puzzle
+    public NumberBox boxPrefab;
     public NumberBox[,] boxes = new NumberBox[3, 3]; // Ajustado para 3x3
-    public Sprite[] sprites; // Deve conter 8 sprites (1 a 8)
-    public GameObject backgroundOverlay; // Fundo escuro
-    public GameObject puzzleUI; // Painel do Puzzle
-    public GameObject closeButton; // Botão de Fechar
-    public GameObject player; // Jogador para desativar o movimento
-    public Vector2 startPoint = new Vector2(8, 8); // Ponto de início para o puzzle com deslocamento
+    public Sprite[] sprites; 
+    public GameObject backgroundOverlay;
+    public GameObject puzzleUI; 
+    public GameObject closeButton;
+    public GameObject player; 
+    public Vector2 startPoint = new Vector2(8, 8); 
 
-    private bool isActive = false; // Controla o estado do puzzle (ativo ou inativo)
-    private bool isInitialized = false; // Controle para evitar recriação do puzzle
-    private Vector2 lastMove; // Guarda o último movimento para evitar repetições no shuffle
-    private Collider2D playerCollider; // Referência ao Collider do jogador
+    private bool isActive = false; 
+    private bool isInitialized = false;
+    private Vector2 lastMove; 
+    private Collider2D playerCollider;
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class Puzzle1516 : MonoBehaviour
         puzzleUI.SetActive(false);
         closeButton.SetActive(false);
 
-        // Obtenha o Collider do jogador
+
         playerCollider = player.GetComponent<Collider2D>();
     }
 
@@ -31,15 +31,14 @@ public class Puzzle1516 : MonoBehaviour
     {
         if (isActive) return;
 
-        // Garante que o fundo, UI do puzzle e o botão de fechar estejam visíveis
         backgroundOverlay.SetActive(true);
         puzzleUI.SetActive(true);
         closeButton.SetActive(true);
 
-        // Desativa o movimento do jogador enquanto o puzzle está ativo
+
         player.GetComponent<NewBehaviourScript>().enabled = false;
 
-        // Desativa a colisão do jogador
+
         if (playerCollider != null)
         {
             playerCollider.enabled = false;
@@ -50,16 +49,16 @@ public class Puzzle1516 : MonoBehaviour
             if (box != null)
             {
                 box.gameObject.SetActive(true);
-                box.UpdatePos(box.GetX(), box.GetY()); // Usa métodos de acesso
+                box.UpdatePos(box.GetX(), box.GetY()); 
             }
         }
 
-        // Inicializa o puzzle apenas na primeira vez
+
         if (!isInitialized)
         {
             Init();
             for (int i = 0;i<999;i++)
-                Shuffle(); // Embaralha o puzzle na primeira vez
+                Shuffle(); 
             isInitialized = true;
         }
 
@@ -73,7 +72,7 @@ public class Puzzle1516 : MonoBehaviour
         {
             for (int x = 0; x < 3; x++)
             {
-                Vector2 position = new Vector2(x + startPoint.x, y + startPoint.y); // Usa deslocamento inicial
+                Vector2 position = new Vector2(x + startPoint.x, y + startPoint.y); 
                 NumberBox box = Instantiate(boxPrefab, position, Quaternion.identity);
                 box.Init(x, y, n + 1, sprites[n], ClickToSwap);
                 boxes[x, y] = box;
@@ -82,7 +81,6 @@ public class Puzzle1516 : MonoBehaviour
         }
     }
 
-    // Configura a formação inicial das peças
     public void SetInitialPositions(int[,] initialPositions)
     {
         for (int y = 2; y >= 0; y--)
@@ -90,7 +88,7 @@ public class Puzzle1516 : MonoBehaviour
             for (int x = 0; x < 3; x++)
             {
                 int pieceIndex = initialPositions[x, y];
-                boxes[x, y].index = pieceIndex; // Define a posição inicial conforme o array
+                boxes[x, y].index = pieceIndex;
                 boxes[x, y].UpdatePos(x, y);
             }
         }
@@ -208,12 +206,10 @@ public class Puzzle1516 : MonoBehaviour
 
     public void EndPuzzle()
     {
-        // Oculta o fundo, UI do puzzle e botão de fechar
         backgroundOverlay.SetActive(false);
         puzzleUI.SetActive(false);
         closeButton.SetActive(false);
 
-        // Desativa cada peça do puzzle para ocultá-la do mapa
         foreach (var box in boxes)
         {
             if (box != null)
@@ -221,11 +217,9 @@ public class Puzzle1516 : MonoBehaviour
                 box.gameObject.SetActive(false);
             }
         }
-
-        // Reativa o movimento do jogador
         player.GetComponent<NewBehaviourScript>().enabled = true;
 
-        // Reativa a colisão do jogador
+
         if (playerCollider != null)
         {
             playerCollider.enabled = true;
