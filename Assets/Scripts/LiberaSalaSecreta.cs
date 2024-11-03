@@ -21,10 +21,22 @@ public class InteractableFinal : MonoBehaviour
     public TMP_Text instructionText; // Text for displaying instructions and feedback
     public string correctPassword = "1234"; // The correct password
 
+    // Lights to activate when the password is validated
+    public GameObject[] lights; // Array of lights to activate
+
     void Start()
     {
         isInRange = false;
         passwordPanel.SetActive(false); // Hide password panel initially
+
+        // Ensure all lights are initially off
+        foreach (var light in lights)
+        {
+            if (light != null)
+            {
+                light.SetActive(false);
+            }
+        }
     }
 
     void Update()
@@ -56,6 +68,9 @@ public class InteractableFinal : MonoBehaviour
         {
             Fake_Black.SetActive(false);
         }
+
+        // Activate the lights
+        ActivateLights();
     }
 
     private void ShowPasswordPanel()
@@ -73,7 +88,7 @@ public class InteractableFinal : MonoBehaviour
         {
             instructionText.text = "Password correct!";
             HidePasswordPanel(); // Hide the password panel
-            Interact(); // Trigger the interaction
+            Interact(); // Trigger the interaction, including activating the lights
         }
         else
         {
@@ -86,6 +101,18 @@ public class InteractableFinal : MonoBehaviour
     private void HidePasswordPanel()
     {
         passwordPanel.SetActive(false); // Hide the password panel
+    }
+
+    private void ActivateLights()
+    {
+        // Loop through each light in the array and activate it
+        foreach (var light in lights)
+        {
+            if (light != null)
+            {
+                light.SetActive(true); // Turn on each light
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

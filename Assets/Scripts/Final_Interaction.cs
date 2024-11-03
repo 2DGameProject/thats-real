@@ -12,16 +12,11 @@ public class Final_Interaction : MonoBehaviour
     public GameObject nextDialogueButton;
     private int dialogueIndex;
 
-    public TMP_Text countdownText;  // TMP_Text to display the countdown timer
-    private bool countdownStarted = false;  // Track if the countdown has started
-    private float countdownTime = 300f;  // 5 minutes in seconds
-
     private Coroutine typingCoroutine; // Reference to the typing coroutine
 
     void Start()
     {
         ResetDialogue();
-        countdownText.gameObject.SetActive(false);  // Initially hide countdown text
     }
 
     void Update()
@@ -46,11 +41,6 @@ public class Final_Interaction : MonoBehaviour
                     }
 
                     typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
-
-                    if (!countdownStarted)  // Ensure countdown only starts once
-                    {
-                        StartCountdown();  // Start countdown immediately
-                    }
                 }
             }
 
@@ -58,11 +48,6 @@ public class Final_Interaction : MonoBehaviour
             {
                 nextDialogueButton.SetActive(true);
             }
-        }
-
-        if (countdownStarted)
-        {
-            UpdateCountdown();  // Continuously update the timer
         }
     }
 
@@ -127,33 +112,6 @@ public class Final_Interaction : MonoBehaviour
         {
             isInteracting = false;
             ResetDialogue(); // Reset when leaving the interaction zone
-        }
-    }
-
-    private void StartCountdown()
-    {
-        countdownStarted = true;
-        countdownText.gameObject.SetActive(true);  // Show countdown on the screen
-    }
-
-    private void UpdateCountdown()
-    {
-        if (countdownTime > 0)
-        {
-            countdownTime -= Time.deltaTime;  // Reduce time
-
-            int minutes = Mathf.FloorToInt(countdownTime / 60);
-            int seconds = Mathf.FloorToInt(countdownTime % 60);
-            int milliseconds = Mathf.FloorToInt((countdownTime % 1) * 1000);  // Extract milliseconds
-
-            // Update countdown text with minutes, seconds, and milliseconds
-            countdownText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
-        }
-        else
-        {
-            countdownStarted = false;  // Stop countdown when time is up
-            countdownText.text = "00:00:000";  // Display 0 when time runs out
-            // Optionally: Trigger an event when the timer finishes
         }
     }
 }
