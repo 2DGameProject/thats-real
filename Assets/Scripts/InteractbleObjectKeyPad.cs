@@ -42,7 +42,7 @@ public class InteractableObjectKeyPad : MonoBehaviour
             // Se o jogador já possui o item chave, mostra o painel do item em vez do KeyPad
             if (panelManagerClassroom != null)
             {
-                Debug.Log("Chamando ShowPanel do PanelManagerClassroom"); // Log para verificar a chamada
+                
                 panelManagerClassroom.ShowPanel(); // Chama ShowPanel
             }
             else
