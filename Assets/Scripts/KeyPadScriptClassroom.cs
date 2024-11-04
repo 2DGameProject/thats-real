@@ -53,7 +53,6 @@ public class KeyPadScriptClassroom : MonoBehaviour
         if (codeOfKeypad.text == "42334") // Verifica se o código está correto
         {
             codeOfKeypad.color = Color.green;
-            Debug.Log("Correct code!");
 
             // Define o estado do jogo como tendo o item chave e revela o item
             GameStateClassroom.PickUpKeyItem();

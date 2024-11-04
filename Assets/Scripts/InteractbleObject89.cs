@@ -1,3 +1,4 @@
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -24,8 +25,9 @@ public class InteractableObject89 : MonoBehaviour
             // Verifica se o armário está disponível (puzzle resolvido)
             if (GameStateClassroom.isCabinetAvailable)
             {
-                ShowTemporaryMessage("Você encontrou o armário!");
-                Debug.Log("Você interagiu com o armário.");
+                ShowTemporaryMessage("De onde veio este Armário?! Parece que há uma passagem secreta por aqui.");
+
+                LoadSpecificScene();
             }
             // Caso contrário, verifica se o jogador possui o item chave para iniciar o puzzle
             else if (GameStateClassroom.hasKeyItem)
@@ -50,6 +52,12 @@ public class InteractableObject89 : MonoBehaviour
         {
             messageCanvas.SetActive(false);
         }
+    }
+
+    void LoadSpecificScene()
+    {
+        // Carrega diretamente a cena com o índice 2 ou pelo nome "Office"
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Office");
     }
 
     public void Interact()

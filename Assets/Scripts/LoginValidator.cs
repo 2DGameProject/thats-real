@@ -25,10 +25,17 @@ public class LoginValidator : MonoBehaviour
         if(loginField.text == "maria#vasconcello" && passwordField.text == "batata@123")
         {
             loginText.text = "Login Successful";
+            LoadScene();
+
         }
         else
         {
             loginText.text = "Login Failed";
         }
+    }
+
+    private void LoadScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Boss_Office"); // Replace "Menu" with the exact name of your final scene
     }
 }

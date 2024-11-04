@@ -25,7 +25,7 @@ public class PortaFinal : MonoBehaviour
 
     private void LoadFinalScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu"); // Replace "Menu" with the exact name of your final scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Room"); // Replace "Menu" with the exact name of your final scene
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
