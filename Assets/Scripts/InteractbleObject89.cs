@@ -26,8 +26,7 @@ public class InteractableObject89 : MonoBehaviour
             if (GameStateClassroom.isCabinetAvailable)
             {
                 ShowTemporaryMessage("De onde veio este Armário?! Parece que há uma passagem secreta por aqui.");
-
-                LoadSpecificScene();
+                StartCoroutine(DelayedSceneLoad());
             }
             // Caso contrário, verifica se o jogador possui o item chave para iniciar o puzzle
             else if (GameStateClassroom.hasKeyItem)
@@ -44,25 +43,31 @@ public class InteractableObject89 : MonoBehaviour
 
     void Start()
     {
-        isInRange = false; // Inicialmente, o jogador não está no alcance
+        isInRange = false; 
         highlightObject.SetActive(false);
 
-        // Certifique-se de que o Canvas e o texto estão escondidos no início
+
         if (messageCanvas != null)
         {
             messageCanvas.SetActive(false);
         }
     }
 
+    private IEnumerator DelayedSceneLoad()
+    {
+        yield return new WaitForSeconds(2.5f);
+        LoadSpecificScene();
+    }
+
     void LoadSpecificScene()
     {
-        // Carrega diretamente a cena com o índice 2 ou pelo nome "Office"
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Office");
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
     public void Interact()
     {
-        // Inicia o puzzle, exibe o fundo escuro e desativa o movimento do jogador
+
         puzzle.StartPuzzle();
     }
 
@@ -71,7 +76,7 @@ public class InteractableObject89 : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             highlightObject.SetActive(true);
-            isInRange = true; // Jogador está no alcance para interagir
+            isInRange = true; 
         }
     }
 
@@ -82,7 +87,6 @@ public class InteractableObject89 : MonoBehaviour
             isInRange = false; // Jogador saiu do alcance
             highlightObject.SetActive(false);
 
-            // Garante que a mensagem e o canvas sejam ocultados ao sair do alcance
             if (notificationCoroutine != null)
             {
                 StopCoroutine(notificationCoroutine);
@@ -96,7 +100,7 @@ public class InteractableObject89 : MonoBehaviour
         }
     }
 
-    // Método para exibir mensagem temporária
+
     private void ShowTemporaryMessage(string message)
     {
         if (notificationCoroutine != null)

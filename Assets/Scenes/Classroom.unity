@@ -10570,6 +10570,8 @@ MonoBehaviour:
     poderia apenas separar os que atrapalham a aula."
   - "Olha este exerc\xEDcio que a professora deixa em cima da mesa dela, faz algum
     sentido para voc\xEA? A escola est\xE1 realmente nos preparando para a vida?"
+  - "Parece at\xE9 que oque est\xE1 escrito no quadro \xE9 a ordem da senha do arm\xE1rio
+    e que se voc\xEA usar a folha da mesa da professora vai encontrar cada n\xFAmero."
   dialogueText: {fileID: 73897389}
   dialogueBox: {fileID: 1937620424}
   nextDialogueButton: {fileID: 1059219090}
@@ -38413,7 +38415,7 @@ RectTransform:
   m_GameObject: {fileID: 1673665442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 83486546}
@@ -42736,7 +42738,7 @@ Transform:
   m_GameObject: {fileID: 2036753127}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.496624, y: -2.565973, z: 1.799039}
+  m_LocalPosition: {x: -4.496624, y: -0.56597304, z: 1.799039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

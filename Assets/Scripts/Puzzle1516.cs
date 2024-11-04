@@ -58,7 +58,7 @@ public class Puzzle1516 : MonoBehaviour
         if (!isInitialized)
         {
             Init();
-            for (int i = 0;i<100;i++)
+            for (int i = 0;i<50;i++)
                 Shuffle(); 
             isInitialized = true;
         }

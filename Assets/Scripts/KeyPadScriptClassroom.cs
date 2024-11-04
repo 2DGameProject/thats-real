@@ -50,11 +50,10 @@ public class KeyPadScriptClassroom : MonoBehaviour
 
     public void CodeComplete()
     {
-        if (codeOfKeypad.text == "42334") // Verifica se o código está correto
+        if (codeOfKeypad.text == "52334") // Verifica se o código está correto
         {
             codeOfKeypad.color = Color.green;
 
-            // Define o estado do jogo como tendo o item chave e revela o item
             GameStateClassroom.PickUpKeyItem();
             RevealKeyItem();
 
