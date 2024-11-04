@@ -5066,7 +5066,7 @@ MonoBehaviour:
   m_text: "N\xE3o deixem demandas finalizadas em suas caixas ocorr\xEAncias disso
     com frequ\xEAncia implicaram em penalidades sal\xE1riais e posteriores demiss\xF5es.
     Se atentem a este ponto ao terminar uma demanda libere para o cliente, temos
-    que aumentar nosso indice de aprova\xE7\xE3o no mercado.\n\n\n\n\t\tAss:maria#vasconcello"
+    que aumentar nosso \xEDndice de aprova\xE7\xE3o no mercado.\n\n\n\n\t\tAss:maria#vasconcello"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21103,8 +21103,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Cronograma de Funcion\xE1rios:\n\n- Segunda-feira: joao#silva\n- Ter\xE7a-feira:
     maria#cardoso\n- Quarta-feira: pedro#almeida\n- Quinta-feira: ana#santos\n- Sexta-feira:
-    lucas#pereira\n\nEsses Funcionarios n\xF3s seus dias devem sempre permanecer
-    no escritorio.\n\nAssim que receber seu login lembre de trocar a senha administrativa
+    lucas#pereira\n\nEsses Funcionarios nos seus dias devem sempre permanecer no
+    escrit\xF3rio.\n\nAssim que receber seu login lembre de trocar a senha administrativa
     padr\xE3o. N\xE3o nos resposabilizamos por acessos indevidos a maquinas devido
     a mesma."
   m_isRightToLeft: 0
