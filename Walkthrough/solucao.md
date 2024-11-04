@@ -14,3 +14,5 @@
 - Depois de um diálogo profundo com o seu chefe, o jogador é capaz de interagir com os diversos objetos espalhados pela sala, cada objeto terá uma descrição sobre ele.
 - Analisando todas as descrições, é percebível que palavras como ETERNIDADE, ETERNO, CONSTÂNCIA, IMORTALIDADE estão em letra maiúscula.
 - Deste modo, a senha que deve ser preenchida para liberar a passagem secreta é: eterno (com letras minúsculas).
+
+# ![PROFESSOR](https://github.com/user-attachments/assets/6def7efb-75c3-4098-baaf-921b0fde3533)
