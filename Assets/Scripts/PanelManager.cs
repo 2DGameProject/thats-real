@@ -8,7 +8,7 @@ public class PanelManager : MonoBehaviour
     public GameObject panel;
     public void ShowPanel()
     {
-        panel.SetActive(panel.activeSelf ? false : true);
+        panel.SetActive(true);
     }
     public void ActivePanel()
     {
