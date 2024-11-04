@@ -3937,7 +3937,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1523986896}
         m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
-        m_MethodName: ShowPanel
+        m_MethodName: DeactivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16299,7 +16299,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1593133487}
         m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
-        m_MethodName: ShowPanel
+        m_MethodName: DeactivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20235,7 +20235,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 756492681}
         m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
-        m_MethodName: ShowPanel
+        m_MethodName: DeactivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25568,7 +25568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afeab13bb502e224d8a54d929eafa850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogues: []
+  dialogues:
+  - "Est\xE1 \xE9 mesa do pedro ele est\xE1 na sala, mas acho que ele n\xE3o esta
+    ligando muito para as coisas."
   dialogueIndex: 0
   dialogueBox: {fileID: 1553083200}
   nextDialogueButton: {fileID: 2142984430}
@@ -43357,7 +43359,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1857200961}
         m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
-        m_MethodName: ShowPanel
+        m_MethodName: DeactivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -52780,7 +52782,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1291252982}
         m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
-        m_MethodName: ShowPanel
+        m_MethodName: DeactivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
