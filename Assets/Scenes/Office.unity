@@ -8485,7 +8485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &348526239
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8528,8 +8528,6 @@ MonoBehaviour:
   - {fileID: 1882183253}
   - {fileID: 1230810119}
   - {fileID: 682825935}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &348526241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21772,7 +21770,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2025780147}
         m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
-        m_MethodName: ShowPanel
+        m_MethodName: DeactivePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -39520,7 +39518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1508304769
 RectTransform:
   m_ObjectHideFlags: 0
