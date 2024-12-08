@@ -6,29 +6,29 @@ using TMPro;
 public class InteractableObject89 : MonoBehaviour
 {
     public KeyCode interactKey = KeyCode.E; // Tecla para interagir
-    public bool isInRange = false; // Verifica se o jogador está no alcance
-    public Puzzle1516 puzzle; // Referência ao script do puzzle
-    public GameObject darkOverlay; // Referência ao fundo escuro
-    public GameObject player; // Referência ao jogador para desativar o movimento
+    public bool isInRange = false; // Verifica se o jogador estï¿½ no alcance
+    public Puzzle1516 puzzle; // Referï¿½ncia ao script do puzzle
+    public GameObject darkOverlay; // Referï¿½ncia ao fundo escuro
+    public GameObject player; // Referï¿½ncia ao jogador para desativar o movimento
     public GameObject highlightObject;
-    public NewBehaviourScript playerMovement; // Referência ao script de movimento do jogador
+    public NewBehaviourScript playerMovement; // Referï¿½ncia ao script de movimento do jogador
     public GameObject messageCanvas; // Canvas com fundo branco e texto de mensagem
-    public TMP_Text notificationText; // Texto de notificação no Canvas
+    public TMP_Text notificationText; // Texto de notificaï¿½ï¿½o no Canvas
 
-    private Coroutine notificationCoroutine; // Controle da exibição da mensagem
+    private Coroutine notificationCoroutine; // Controle da exibiï¿½ï¿½o da mensagem
 
     void Update()
     {
-        // Se o jogador estiver no alcance e pressionar a tecla de interação
+        // Se o jogador estiver no alcance e pressionar a tecla de interaï¿½ï¿½o
         if (isInRange && Input.GetKeyDown(interactKey))
         {
-            // Verifica se o armário está disponível (puzzle resolvido)
+            // Verifica se o armï¿½rio estï¿½ disponï¿½vel (puzzle resolvido)
             if (GameStateClassroom.isCabinetAvailable)
             {
-                ShowTemporaryMessage("De onde veio este Armário?! Parece que há uma passagem secreta por aqui.");
+                ShowTemporaryMessage("De onde veio este Armï¿½rio?! Parece que hï¿½ uma passagem secreta por aqui.");
                 StartCoroutine(DelayedSceneLoad());
             }
-            // Caso contrário, verifica se o jogador possui o item chave para iniciar o puzzle
+            // Caso contrï¿½rio, verifica se o jogador possui o item chave para iniciar o puzzle
             else if (GameStateClassroom.hasKeyItem)
             {
                 playerMovement.rb.velocity = Vector2.zero;
@@ -36,7 +36,7 @@ public class InteractableObject89 : MonoBehaviour
             }
             else
             {
-                ShowTemporaryMessage("Parece que está faltando uma peça");
+                ShowTemporaryMessage("Parece que estï¿½ faltando uma peï¿½a");
             }
         }
     }
@@ -77,6 +77,11 @@ public class InteractableObject89 : MonoBehaviour
         {
             highlightObject.SetActive(true);
             isInRange = true; 
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable89(this);
+            }
         }
     }
 
@@ -87,6 +92,11 @@ public class InteractableObject89 : MonoBehaviour
             isInRange = false; // Jogador saiu do alcance
             highlightObject.SetActive(false);
 
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable89(null);
+            }
             if (notificationCoroutine != null)
             {
                 StopCoroutine(notificationCoroutine);
@@ -113,11 +123,11 @@ public class InteractableObject89 : MonoBehaviour
     private IEnumerator DisplayMessage(string message, float duration)
     {
         notificationText.text = message;
-        messageCanvas.SetActive(true); // Mostra o Canvas com o retângulo branco e a mensagem
+        messageCanvas.SetActive(true); // Mostra o Canvas com o retï¿½ngulo branco e a mensagem
 
         yield return new WaitForSeconds(duration);
 
-        messageCanvas.SetActive(false); // Oculta o Canvas após o tempo definido
+        messageCanvas.SetActive(false); // Oculta o Canvas apï¿½s o tempo definido
         notificationCoroutine = null;
     }
 }

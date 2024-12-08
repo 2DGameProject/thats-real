@@ -36,6 +36,12 @@ public class InteractbleObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = true;
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable2(this);
+            }
         }
     }
 
@@ -46,6 +52,11 @@ public class InteractbleObject : MonoBehaviour
             isInRange = false;
             highlightObject.SetActive(false);
             LostTriggerAction.Invoke();
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable2(null);
+            }
         }
     }
 

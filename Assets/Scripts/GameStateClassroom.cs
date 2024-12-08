@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameStateClassroom : MonoBehaviour
 {
 
@@ -15,8 +15,9 @@ public class GameStateClassroom : MonoBehaviour
 
     public static void SetCabinetAvailable()
     {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2, LoadSceneMode.Single);
         isCabinetAvailable = true;
-        Debug.Log("O armário está disponível para interação.");
+        Debug.Log("O armï¿½rio estï¿½ disponï¿½vel para interaï¿½ï¿½o.");
     }
 
 

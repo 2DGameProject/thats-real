@@ -32,38 +32,6 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
-        if(isInteracting)
-        {
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                if(dialogueBox.activeInHierarchy)
-                {
-                    ResetDialogue();
-                }
-                else
-                {
-                    dialogueBox.SetActive(true);
-                    nextDialogueButton.SetActive(false);
-                    if (typingCoroutine != null)
-                    {
-                        StopCoroutine(typingCoroutine);
-                    }
-                    StartTyping(dialogues[dialogueIndex]);
-                }
-            }
-
-            if(dialogueText.text == dialogues[dialogueIndex])
-            {
-                nextDialogueButton.SetActive(true);
-            }
-            
-            anim.SetFloat("Vertical", 0);
-            anim.SetFloat("Horizontal", 0);
-            anim.SetFloat("Speed", 0);
-            
-            return;
-        }
-
         transform.position = Vector2.MoveTowards(transform.position, moveSpots[InitialSpot].position, speed * Time.deltaTime);
 
         Vector3 movementDirection = transform.position - lastPosition;
@@ -146,6 +114,34 @@ public class Patrol : MonoBehaviour
         }
     }
 
+    public void Interact(){
+        if(dialogueBox.activeInHierarchy)
+        {
+            ResetDialogue();
+        }
+        else
+        {
+            dialogueBox.SetActive(true);
+            nextDialogueButton.SetActive(false);
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+            }
+            StartTyping(dialogues[dialogueIndex]);
+        }
+
+        if(dialogueText.text == dialogues[dialogueIndex])
+        {
+            nextDialogueButton.SetActive(true);
+        }
+        
+        anim.SetFloat("Vertical", 0);
+        anim.SetFloat("Horizontal", 0);
+        anim.SetFloat("Speed", 0);
+        
+        return;
+    }
+
     public void NextDialogue()
     {
         nextDialogueButton.SetActive(false);
@@ -166,6 +162,12 @@ public class Patrol : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInteracting = true;
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable7(this);
+            }
         }
     }
 
@@ -175,6 +177,12 @@ public class Patrol : MonoBehaviour
         {
             isInteracting = false;
             ResetDialogue();
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable7(null);
+            }
         }
     }
 }

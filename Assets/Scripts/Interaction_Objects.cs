@@ -20,41 +20,71 @@ public class Boss_Interaction : MonoBehaviour
         isInRange = false; // Initially, the player is not in range
     }
 
-    void Update()
-    {
+    // void Update()
+    // {
+    //     if (isInteracting)
+    //     {
+    //         if (Input.GetKeyDown(KeyCode.E))
+    //         {
+    //             ResetDialogue();
+
+    //             if (dialogueBox.activeInHierarchy)
+    //             {
+    //                 ResetDialogue();
+    //             }
+    //             else
+    //             {
+    //                 ResetDialogue(); // Reset dialogue to start fresh
+    //                 dialogueBox.SetActive(true);
+
+    //                 // Stop any ongoing typing coroutine before starting a new one
+    //                 if (typingCoroutine != null)
+    //                 {
+    //                     StopCoroutine(typingCoroutine);
+    //                 }
+
+    //                 typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
+    //             }
+    //         }
+
+    //         // Show next button when typing completes
+    //         if (dialogueText.text == dialogues[dialogueIndex])
+    //         {
+    //             nextDialogueButton.SetActive(true);
+    //         }
+    //     }
+    // }
+
+    public void Interact(){
         if (isInteracting)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            ResetDialogue();
+
+            if (dialogueBox.activeInHierarchy)
             {
                 ResetDialogue();
-
-                if (dialogueBox.activeInHierarchy)
-                {
-                    ResetDialogue();
-                }
-                else
-                {
-                    ResetDialogue(); // Reset dialogue to start fresh
-                    dialogueBox.SetActive(true);
-
-                    // Stop any ongoing typing coroutine before starting a new one
-                    if (typingCoroutine != null)
-                    {
-                        StopCoroutine(typingCoroutine);
-                    }
-
-                    typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
-                }
             }
-
-            // Show next button when typing completes
-            if (dialogueText.text == dialogues[dialogueIndex])
+            else
             {
-                nextDialogueButton.SetActive(true);
+                ResetDialogue(); // Reset dialogue to start fresh
+                dialogueBox.SetActive(true);
+
+                // Stop any ongoing typing coroutine before starting a new one
+                if (typingCoroutine != null)
+                {
+                    StopCoroutine(typingCoroutine);
+                }
+
+                typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
             }
         }
-    }
 
+        // Show next button when typing completes
+        if (dialogueText.text == dialogues[dialogueIndex])
+        {
+            nextDialogueButton.SetActive(true);
+        }
+    }
     private void ResetDialogue()
     {
         dialogueIndex = 0;
@@ -109,6 +139,12 @@ public class Boss_Interaction : MonoBehaviour
         {
             isInRange = true; // Set player as in range
             isInteracting = true;
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable3(this);
+            }
         }
     }
 
@@ -119,6 +155,12 @@ public class Boss_Interaction : MonoBehaviour
             isInRange = false; // Set player as out of range
             isInteracting = false;
             ResetDialogue(); // Reset when leaving the interaction zone
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null && playerController.GetCurrentInteractable3() == this)
+            {
+                playerController.SetCurrentInteractable3(null);
+            }
         }
     }
 

@@ -14,7 +14,7 @@ public class MobileInteractButton : MonoBehaviour
 
     [Tooltip("Set the virtual key code (e.g., 0x1B for ESC, 0x45 for E)")]
     public int virtualKeyCode = 0x45; // Default to ESC key
-
+    public Canvas canvas;
     public void SimulateEKeyPress()
     {
         byte key = (byte)virtualKeyCode;
@@ -25,6 +25,5 @@ public class MobileInteractButton : MonoBehaviour
         // Simulate the key up
         keybd_event(key, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
 
-        Debug.Log($"Simulated key press: 0x{key:X}");
     }
 }

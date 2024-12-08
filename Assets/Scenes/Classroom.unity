@@ -8009,11 +8009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b03b5475adc0648afbdd0db1203841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactKey: 101
-  isInRange: 0
   panelManagerClassroom: {fileID: 1609008643}
   highlightObject: {fileID: 1499122551}
   playerMovement: {fileID: 677956360}
+  isInRange: 0
 --- !u!1 &229711874
 GameObject:
   m_ObjectHideFlags: 0
@@ -8879,7 +8878,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -38.794907, y: 20.418312, z: -39.815857, w: 14.292885}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -13650,6 +13649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualKeyCode: 27
+  canvas: {fileID: 0}
 --- !u!114 &560883068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13694,9 +13694,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 560883067}
-        m_TargetAssemblyTypeName: MobileInteractButton, Assembly-CSharp
-        m_MethodName: SimulateEKeyPress
+      - m_Target: {fileID: 677956366}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13761,7 +13761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 468.80994}
+  m_AnchoredPosition: {x: 0, y: 388}
   m_SizeDelta: {x: 134.5, y: 142.375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &594915798
@@ -14621,7 +14621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &661592246
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14671,7 +14671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 2
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -14932,7 +14932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -15308,8 +15308,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677956359}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.000122, y: 7.999939, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21784,7 +21784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 128}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &861752406
@@ -24193,11 +24193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b03b5475adc0648afbdd0db1203841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactKey: 101
-  isInRange: 0
   panelManagerClassroom: {fileID: 1706969794}
   highlightObject: {fileID: 167099871}
   playerMovement: {fileID: 677956360}
+  isInRange: 0
 --- !u!1 &1048263693
 GameObject:
   m_ObjectHideFlags: 0
@@ -25580,7 +25579,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 450, y: 450}
+  m_SizeDelta: {x: 450, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1167455801
 MonoBehaviour:
@@ -26892,7 +26891,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 677956366}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: PauseGame
+        m_MethodName: GoToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27110,7 +27109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchoredPosition: {x: 0, y: -131}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1317294746
@@ -28753,7 +28752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0ac6d5e831e9446b35d703041cf91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualKeyCode: 69
+  virtualKeyCode: 45
+  canvas: {fileID: 0}
 --- !u!114 &1443020350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28798,9 +28798,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1443020349}
-        m_TargetAssemblyTypeName: MobileInteractButton, Assembly-CSharp
-        m_MethodName: SimulateEKeyPress
+      - m_Target: {fileID: 677956360}
+        m_TargetAssemblyTypeName: NewBehaviourScript, Assembly-CSharp
+        m_MethodName: OnInteractButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -45972,6 +45972,7 @@ SceneRoots:
   - {fileID: 723255321}
   - {fileID: 39451901}
   - {fileID: 134307829}
+  - {fileID: 677956363}
   - {fileID: 1257841982}
   - {fileID: 1430440137}
   - {fileID: 1177588043}
@@ -45980,7 +45981,6 @@ SceneRoots:
   - {fileID: 1003478380}
   - {fileID: 214100534}
   - {fileID: 546277439}
-  - {fileID: 677956363}
   - {fileID: 1695605896}
   - {fileID: 859261620}
   - {fileID: 676098017}

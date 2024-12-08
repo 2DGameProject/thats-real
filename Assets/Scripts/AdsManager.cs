@@ -19,7 +19,6 @@ public class AdsManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
 
         rewardedAds.LoadRewardedAd();

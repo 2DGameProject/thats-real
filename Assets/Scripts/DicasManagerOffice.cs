@@ -4,94 +4,93 @@ using UnityEngine.UI;
 
 public class DicasManagerOffice : MonoBehaviour
 {
-    public static DicasManagerOffice Instance { get; private set; }  // Instância estática para Singleton
+    public static DicasManagerOffice Instance { get; private set; }  // Instï¿½ncia estï¿½tica para Singleton
 
-    public Button botaoMostrarOpcoes;    // Botão principal para mostrar o menu de opções
-    public GameObject painelOpcoes;      // Painel que contém os botões de Dica e Anúncio
-    public Button botaoDica;             // Botão para ver a primeira dica
-    public Button botaoAnuncio;          // Botão para ver o vídeo de anúncio
-    public Button botaoFechar;           // Botão para fechar o painel de opções
+    public Button botaoMostrarOpcoes;    // Botï¿½o principal para mostrar o menu de opï¿½ï¿½es
+    public GameObject painelOpcoes;      // Painel que contï¿½m os botï¿½es de Dica e Anï¿½ncio
+    public Button botaoDica;             // Botï¿½o para ver a primeira dica
+    public Button botaoAnuncio;          // Botï¿½o para ver o vï¿½deo de anï¿½ncio
+    public Button botaoFechar;           // Botï¿½o para fechar o painel de opï¿½ï¿½es
     public TextMeshProUGUI dicaTexto;    // Texto para exibir a dica
     private bool dicaVisto = false;      // Flag para saber se a dica foi vista
-    private bool primeiraDica = true;    // Flag para controlar se é a primeira vez que o jogador está vendo a dica
-    private bool botaoDicaVisivel = true; // Flag para controlar a visibilidade do botão de Dica
-    private bool botaoAnuncioVisivel = false; // Flag para controlar a visibilidade do botão de Anúncio
+    private bool primeiraDica = true;    // Flag para controlar se ï¿½ a primeira vez que o jogador estï¿½ vendo a dica
+    private bool botaoDicaVisivel = true; // Flag para controlar a visibilidade do botï¿½o de Dica
+    private bool botaoAnuncioVisivel = false; // Flag para controlar a visibilidade do botï¿½o de Anï¿½ncio
 
     void Awake()
     {
-        // Garante que só exista uma instância do DicasManager
+        // Garante que sï¿½ exista uma instï¿½ncia do DicasManager
         if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            Destroy(gameObject); // Destrói o objeto se uma instância já existir
+            Destroy(gameObject); // Destrï¿½i o objeto se uma instï¿½ncia jï¿½ existir
             return;
         }
 
-        // Não destrua o DicasManager entre cenas
-        DontDestroyOnLoad(gameObject);
+        // Nï¿½o destrua o DicasManager entre cenas
     }
 
     void Start()
     {
-        // Inicialmente o painel de opções está desativado
+        // Inicialmente o painel de opï¿½ï¿½es estï¿½ desativado
         painelOpcoes.SetActive(false);
 
-        // Configura os botões
+        // Configura os botï¿½es
         botaoMostrarOpcoes.onClick.AddListener(MostrarOpcoes);
         botaoDica.onClick.AddListener(ExibirDica);
-        botaoAnuncio.gameObject.SetActive(false);  // Inicialmente desativa o botão de anúncio
+        botaoAnuncio.gameObject.SetActive(false);  // Inicialmente desativa o botï¿½o de anï¿½ncio
         botaoFechar.onClick.AddListener(CerrarMenu);
     }
 
-    // Função para mostrar o painel de opções
+    // Funï¿½ï¿½o para mostrar o painel de opï¿½ï¿½es
     void MostrarOpcoes()
     {
-        painelOpcoes.SetActive(true);  // Ativa o painel de opções
+        painelOpcoes.SetActive(true);  // Ativa o painel de opï¿½ï¿½es
 
-        // Exibe os botões com base nas flags
+        // Exibe os botï¿½es com base nas flags
         botaoDica.gameObject.SetActive(botaoDicaVisivel);
         botaoAnuncio.gameObject.SetActive(botaoAnuncioVisivel);
     }
 
-    // Função para exibir a dica gratuita
+    // Funï¿½ï¿½o para exibir a dica gratuita
     void ExibirDica()
     {
         // Exibe a dica inicial
-        dicaTexto.text = "Dica grátis: Preste atenção no computador do Pedro.\n\n" +
-                         "Você pode assistir um anúncio para ganhar outra dica.";
+        dicaTexto.text = "Dica grï¿½tis: Preste atenï¿½ï¿½o no computador do Pedro.\n\n" +
+                         "Vocï¿½ pode assistir um anï¿½ncio para ganhar outra dica.";
 
         // Marca que a dica foi vista
         dicaVisto = true;
         primeiraDica = false;
 
-        // Esconde o botão de Dica
-        botaoDicaVisivel = false; // Marca o botão de Dica como invisível
-        botaoAnuncioVisivel = true; // Marca o botão de Anúncio como visível
+        // Esconde o botï¿½o de Dica
+        botaoDicaVisivel = false; // Marca o botï¿½o de Dica como invisï¿½vel
+        botaoAnuncioVisivel = true; // Marca o botï¿½o de Anï¿½ncio como visï¿½vel
 
-        // Esconde o botão de Dica
+        // Esconde o botï¿½o de Dica
         botaoDica.gameObject.SetActive(botaoDicaVisivel);
 
-        // Mostra o botão de Anúncio (após ver a dica)
+        // Mostra o botï¿½o de Anï¿½ncio (apï¿½s ver a dica)
         botaoAnuncio.gameObject.SetActive(botaoAnuncioVisivel);
     }
 
-    // Função chamada após assistir o anúncio para atualizar a dica
+    // Funï¿½ï¿½o chamada apï¿½s assistir o anï¿½ncio para atualizar a dica
     public void AtualizarDica()
     {
-        dicaTexto.text = "Dica grátis: Preste atenção no computador do Pedro.\n\n" +
-                         "Dica: O último usuário foi….\n\n";
+        dicaTexto.text = "Dica grï¿½tis: Preste atenï¿½ï¿½o no computador do Pedro.\n\n" +
+                         "Dica: O ï¿½ltimo usuï¿½rio foiï¿½.\n\n";
 
-        // Esconde o botão de Anúncio após o anúncio ser assistido
+        // Esconde o botï¿½o de Anï¿½ncio apï¿½s o anï¿½ncio ser assistido
         botaoAnuncio.gameObject.SetActive(false);
         botaoAnuncioVisivel = false;
     }
 
-    // Função para fechar o menu de opções
+    // Funï¿½ï¿½o para fechar o menu de opï¿½ï¿½es
     void CerrarMenu()
     {
-        painelOpcoes.SetActive(false);  // Desativa o painel de opções
+        painelOpcoes.SetActive(false);  // Desativa o painel de opï¿½ï¿½es
     }
 }

@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class KeyPadScriptClassroom : MonoBehaviour
 {
     public TMP_Text codeOfKeypad;
-    public GameObject darkOverlay;      // Referência ao fundo escuro
-    public GameObject player;           // Referência ao jogador para desativar o movimento
-    public GameObject closeButton;      // Referência ao botão de fechar
-    public GameObject keyItem;          // Objeto chave que será revelado
+    public GameObject darkOverlay;      // Referï¿½ncia ao fundo escuro
+    public GameObject player;           // Referï¿½ncia ao jogador para desativar o movimento
+    public GameObject closeButton;      // Referï¿½ncia ao botï¿½o de fechar
+    public GameObject keyItem;          // Objeto chave que serï¿½ revelado
     public GameObject keyItemCanvas;    // Canvas opcional para mostrar que o item foi adquirido
 
     void Start()
@@ -50,7 +50,7 @@ public class KeyPadScriptClassroom : MonoBehaviour
 
     public void CodeComplete()
     {
-        if (codeOfKeypad.text == "52334") // Verifica se o código está correto
+        if (codeOfKeypad.text == "52334") // Verifica se o cï¿½digo estï¿½ correto
         {
             codeOfKeypad.color = Color.green;
 
@@ -114,7 +114,7 @@ public class KeyPadScriptClassroom : MonoBehaviour
         player.GetComponent<NewBehaviourScript>().enabled = !isActive;
     }
 
-    // Fechar o Keypad manualmente pelo botão
+    // Fechar o Keypad manualmente pelo botï¿½o
     public void CloseKeyPad()
     {
         gameObject.SetActive(false);

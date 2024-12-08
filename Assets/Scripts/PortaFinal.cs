@@ -28,12 +28,25 @@ public class PortaFinal : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Room"); // Replace "Menu" with the exact name of your final scene
     }
 
+    public void Interact()
+    {
+        if(isInRange){
+            LoadFinalScene();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = true;
             isInteracting = true;
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable5(this);
+            }
         }
     }
 
@@ -43,6 +56,12 @@ public class PortaFinal : MonoBehaviour
         {
             isInRange = false;
             isInteracting = false;
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable5(null);
+            }
         }
     }
 

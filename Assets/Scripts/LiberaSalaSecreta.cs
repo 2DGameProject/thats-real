@@ -48,7 +48,7 @@ public class InteractableFinal : MonoBehaviour
         }
 
         // Check for Enter key only if the password panel is active
-        if (passwordPanel.activeInHierarchy && Input.GetKeyDown(KeyCode.Return))
+        if (passwordPanel.activeInHierarchy)
         {
             CheckPassword(); // Submit the password when Enter is pressed
         }
@@ -73,7 +73,7 @@ public class InteractableFinal : MonoBehaviour
         ActivateLights();
     }
 
-    private void ShowPasswordPanel()
+    public void ShowPasswordPanel()
     {
         passwordPanel.SetActive(true); // Show the password panel
         instructionText.text = "Enter the password:"; // Set instruction text
@@ -89,12 +89,6 @@ public class InteractableFinal : MonoBehaviour
             instructionText.text = "Password correct!";
             HidePasswordPanel(); // Hide the password panel
             Interact(); // Trigger the interaction, including activating the lights
-        }
-        else
-        {
-            instructionText.text = "Incorrect password. Try again."; // Feedback on wrong password
-            passwordInputField.text = ""; // Clear input field for retry
-            passwordInputField.ActivateInputField(); // Refocus the input field for another attempt
         }
     }
 
@@ -120,6 +114,12 @@ public class InteractableFinal : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInRange = true;
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable4(this);
+            }
         }
     }
 
@@ -129,6 +129,11 @@ public class InteractableFinal : MonoBehaviour
         {
             isInRange = false;
             HidePasswordPanel(); // Hide the password panel when out of range
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable4(null);
+            }
         }
     }
 

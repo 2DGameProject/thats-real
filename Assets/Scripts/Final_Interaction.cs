@@ -21,28 +21,30 @@ public class Final_Interaction : MonoBehaviour
 
     void Update()
     {
+
+    }
+
+    public void Interact(){
         if (isInteracting)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (dialogueBox.activeInHierarchy)
             {
-                if (dialogueBox.activeInHierarchy)
-                {
-                    ResetDialogue();
-                }
-                else
-                {
-                    ResetDialogue(); // Reset dialogue to start fresh
-                    dialogueBox.SetActive(true);
-
-                    // Stop any ongoing typing coroutine before starting a new one
-                    if (typingCoroutine != null)
-                    {
-                        StopCoroutine(typingCoroutine);
-                    }
-
-                    typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
-                }
+                ResetDialogue();
             }
+            else
+            {
+                ResetDialogue(); // Reset dialogue to start fresh
+                dialogueBox.SetActive(true);
+
+                // Stop any ongoing typing coroutine before starting a new one
+                if (typingCoroutine != null)
+                {
+                    StopCoroutine(typingCoroutine);
+                }
+
+                typingCoroutine = StartCoroutine(TypeDialogue(dialogues[dialogueIndex]));
+            }
+            
 
             if (dialogueText.text == dialogues[dialogueIndex])
             {
@@ -50,7 +52,6 @@ public class Final_Interaction : MonoBehaviour
             }
         }
     }
-
     private void ResetDialogue()
     {
         dialogueIndex = 0;
@@ -103,6 +104,12 @@ public class Final_Interaction : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInteracting = true;
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable6(this);
+            }
         }
     }
 
@@ -111,7 +118,13 @@ public class Final_Interaction : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isInteracting = false;
-            ResetDialogue(); // Reset when leaving the interaction zone
+            ResetDialogue();
+
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                playerController.SetCurrentInteractable6(null);
+            }
         }
     }
 }

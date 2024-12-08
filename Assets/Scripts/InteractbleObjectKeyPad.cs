@@ -5,11 +5,11 @@ public class InteractableObjectKeyPad : MonoBehaviour
 {
     public KeyCode interactKey = KeyCode.E;
     public bool isInRange = false;
-    public KeyPadScriptClassroom keypad; // Referência ao KeyPadScriptClassroom
+    public KeyPadScriptClassroom keypad; // Referï¿½ncia ao KeyPadScriptClassroom
     public GameObject highlightObject;
-    public GameObject keyPiecePuzzle; // O objeto ou painel que será exibido ao invés do KeyPad
+    public GameObject keyPiecePuzzle; // O objeto ou painel que serï¿½ exibido ao invï¿½s do KeyPad
     public PanelManagerClassroom panelManagerClassroom;
-    public NewBehaviourScript playerMovement; // Referência ao script de movimento do jogador
+    public NewBehaviourScript playerMovement; // Referï¿½ncia ao script de movimento do jogador
 
     private Vector2 originalVelocity; // Para armazenar a velocidade original do jogador
 
@@ -39,7 +39,7 @@ public class InteractableObjectKeyPad : MonoBehaviour
         if (GameStateClassroom.hasKeyItem)
         {
             
-            // Se o jogador já possui o item chave, mostra o painel do item em vez do KeyPad
+            // Se o jogador jï¿½ possui o item chave, mostra o painel do item em vez do KeyPad
             if (panelManagerClassroom != null)
             {
                 
@@ -47,7 +47,7 @@ public class InteractableObjectKeyPad : MonoBehaviour
             }
             else
             {
-                Debug.LogError("panelManagerClassroom não está referenciado no Inspector!"); // Log de erro se estiver null
+                Debug.LogError("panelManagerClassroom nï¿½o estï¿½ referenciado no Inspector!"); // Log de erro se estiver null
             }
         }
         else if (keypad != null)
@@ -64,6 +64,12 @@ public class InteractableObjectKeyPad : MonoBehaviour
         {
             isInRange = true;
             highlightObject.SetActive(true);
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                Debug.Log("Player is in range");
+                playerController.SetCurrentKeypadInteractable(this);
+            }
         }
     }
 
@@ -73,6 +79,12 @@ public class InteractableObjectKeyPad : MonoBehaviour
         {
             isInRange = false;
             highlightObject.SetActive(false);
+            NewBehaviourScript playerController = collision.GetComponent<NewBehaviourScript>();
+            if (playerController != null)
+            {
+                Debug.Log("Player out of range");
+                playerController.SetCurrentKeypadInteractable(null);
+            }
         }
     }
 }
