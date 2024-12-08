@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+public class RewardedAdsOffice : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] private string androidAdUnitId;
     [SerializeField] private string iosAdUnitId;
@@ -13,7 +13,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     private void Awake()
     {
 #if UNITY_IOS
-       adUnitId = iosAdUnitId;
+                        adUnitId = iosAdUnitId;
 #elif UNITY_ANDROID
         adUnitId = androidAdUnitId;
 #endif
@@ -56,7 +56,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         {
             Debug.Log("Ads Fully Watched .....");
 
-            DicasManager.Instance.AtualizarDica();
+            DicasManagerOffice.Instance.AtualizarDica();
 
             GameManager.Instance.isRewared = true;
         }
